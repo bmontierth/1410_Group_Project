@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public abstract class Character {
 
@@ -11,14 +12,14 @@ public abstract class Character {
 	 *
 	 * @param attack
 	 * @param defense
-	 * @param health
+     * @param health
 	 * @param crit
      * @param name
      */
 	public Character(int attack, int defense, int health, int crit, String name) {
-		this.attack = attack;
-		this.defense = defense;
-		this.health = health;
+		this.attack = attack * 3;
+		this.defense = defense * 2;
+		this.health = health * 10;
 		this.crit = crit;
 		this.name = name;
 	}
@@ -85,7 +86,26 @@ public abstract class Character {
 	public String getName() {
 		return name;
 	}
-	
-	
+
+
+	public int attack(Character character, int tempHealth){
+		
+		int critMultiplier = 1;
+		int thisAttackValue;
+		int critChance;
+		Random random = new Random();
+		
+		critChance = random.nextInt(100) + this.getCrit();
+		
+		if (critChance > 75)
+			critMultiplier = 2;
+			
+			thisAttackValue = (this.getAttack()  - character.getDefense()) * critMultiplier;
+			
+		
+		return (tempHealth < thisAttackValue) ? tempHealth : thisAttackValue;
+
+	}
+
 
 }

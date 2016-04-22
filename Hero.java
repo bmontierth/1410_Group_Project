@@ -38,6 +38,10 @@ public class Hero extends Character {
 	public String toString() {
 		return super.getName() + " the " + getHeroClass();
 	}
+
+	public void levelUp(){
+		level++;
+	}
 }
 
 

@@ -16,14 +16,13 @@ public class Enemy extends Character {
         super(attack, defense, health, crit, name);
     }
 
-    public static void randomEnemy(int heroLevel){
+    public static Character randomEnemy(int heroLevel){
 
-
-
+    	return null;
     }
 
     @Override
     public String toString() {
-        return "";
+        return super.getName();
     }
 }
