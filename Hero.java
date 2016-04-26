@@ -1,7 +1,10 @@
+import javax.swing.Icon;
 
 public class Hero extends Character {
 	private int level;
 	private final String heroClass;
+	private final Icon fullImage;
+	private final Icon faceImage;
 	/**
 	 * Constructor to create a Hero.
 	 * @param CLASS One of the classes from Enum InitHeroClass.
@@ -11,6 +14,8 @@ public class Hero extends Character {
 		super(CLASS.ATTACK, CLASS.DEFENSE, CLASS.HEALTH, CLASS.CRIT, name);
 		this.level = 1;
 		this.heroClass = CLASS.toString();
+		this.fullImage = CLASS.fullImage;
+		this.faceImage = CLASS.faceImage;
 	}
 
 	/**
@@ -39,9 +44,21 @@ public class Hero extends Character {
 		return super.getName() + " the " + getHeroClass();
 	}
 
-	public void levelUp(){
-		level++;
+	/**
+	 * @return the fullImage
+	 */
+	public Icon getFullImage() {
+		return fullImage;
 	}
+
+	/**
+	 * @return the faceImage
+	 */
+	public Icon getFaceImage() {
+		return faceImage;
+	}
+
+	
 }
 
 

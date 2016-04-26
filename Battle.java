@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JProgressBar;
@@ -14,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.BevelBorder;
+import java.awt.Dimension;
 
 public class Battle {
 
@@ -73,7 +77,8 @@ public class Battle {
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblHeroFace = new JLabel("");
-		lblHeroFace.setIcon(new ImageIcon("C:\\Users\\Brian\\Pictures\\smallestMario.ico.png"));
+		lblHeroFace.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		lblHeroFace.setIcon(new ImageIcon(Battle.class.getResource("/imgss/swordguyface.png")));
 		GridBagConstraints gbc_lblHeroFace = new GridBagConstraints();
 		gbc_lblHeroFace.insets = new Insets(0, 0, 0, 5);
 		gbc_lblHeroFace.gridx = 0;
@@ -157,16 +162,27 @@ public class Battle {
 		frame.getContentPane().add(battleMessage, BorderLayout.CENTER);
 		
 		JLabel lblHeroImage = new JLabel("");
-		lblHeroImage.setIcon(new ImageIcon("C:\\Users\\Brian\\Pictures\\Mario.png"));
+		lblHeroImage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeroImage.setPreferredSize(new Dimension(128, 0));
+		lblHeroImage.setIcon(new ImageIcon(Battle.class.getResource("/imgss/cuteswordguy.png")));
 		frame.getContentPane().add(lblHeroImage, BorderLayout.WEST);
 		
 		JLabel lblEnemyImage = new JLabel("");
-		lblEnemyImage.setIcon(new ImageIcon("C:\\Users\\Brian\\Pictures\\Mario.png"));
+		lblEnemyImage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnemyImage.setPreferredSize(new Dimension(128, 0));
+		lblEnemyImage.setIcon(new ImageIcon(Battle.class.getResource("/imgss/demon.png")));
 		frame.getContentPane().add(lblEnemyImage, BorderLayout.EAST);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				btnNewButton.setEnabled(false);
+				lblHeroImage.setVisible(false);
+				battleMessage.setHorizontalAlignment(SwingConstants.RIGHT);
+				battleMessage.setIcon(lblHeroImage.getIcon());
+				battleMessage.setIconTextGap(-300);
+				
+				
 				message = "";
 				
 				enemyDamage = hero.attack(enemy, enemyTempHealth);
@@ -177,11 +193,40 @@ public class Battle {
 				message = hero.getName() + " hit " + enemy.getName() + " for " + enemyDamage + " damage!";
 				battleMessage.setText(message);
 				
-				if (enemyTempHealth == 0) return;
+				
+				
+				if (enemyTempHealth == 0) {
+					btnNewButton.setEnabled(true);
+					battleMessage.setHorizontalAlignment(SwingConstants.CENTER);
+	        		battleMessage.setIcon(null);
+	        		lblEnemyImage.setVisible(true);
+	        		lblHeroImage.setVisible(true);
+					return;
+				}
+				
+					
+				
 				
 				ActionListener listener = new ActionListener(){
 			        public void actionPerformed(ActionEvent event){
-			 
+			        	
+			        	if (battleMessage.getIcon().equals(lblEnemyImage.getIcon())) {
+			        		battleMessage.setHorizontalAlignment(SwingConstants.CENTER);
+			        		battleMessage.setIcon(null);
+			        		lblEnemyImage.setVisible(true);
+			        		btnNewButton.setEnabled(true);
+			        		return;
+			        	}
+			        	
+			        	if (battleMessage.getIcon().equals(lblHeroImage.getIcon())) {
+			        		battleMessage.setIconTextGap(4);
+							lblHeroImage.setVisible(true);
+							lblEnemyImage.setVisible(false);
+							battleMessage.setHorizontalAlignment(SwingConstants.LEFT);
+							battleMessage.setIcon(lblEnemyImage.getIcon());
+							((Timer) event.getSource()).restart();
+			        	}
+
 			        	heroDamage = enemy.attack(hero, heroTempHealth);
 						heroTempHealth -= heroDamage;
 						heroHealthBar.setString(Integer.toString(heroTempHealth));
@@ -189,13 +234,20 @@ public class Battle {
 						
 						message = "<html>" + message + "<br>" + enemy.getName() + " hit " + hero.getName() + " for " + heroDamage + " damage!</html>";
 						battleMessage.setText(message);
+						
+						String[] buttons = { "Attack", "Defense", "Health", "Crit"};    
+						int returnValue = JOptionPane.showOptionDialog(null, "Select a stat to level:", "Choose Stat",
+						        JOptionPane.PLAIN_MESSAGE, 0, new ImageIcon(Battle.class.getResource("/imgss/swordguyface.png")), buttons, buttons[0]);
+						System.out.println(returnValue);
+						
 			        }
 			    };
 			    Timer timer = new Timer(2000, listener);
 			    timer.setRepeats(false);
 			    timer.start();
 			    
-			    //battleMessage.setText(message);
+			    
+			    
 				
 				
 			}
