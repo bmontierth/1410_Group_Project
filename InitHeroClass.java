@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 public enum InitHeroClass {
     ARCHER(12,11,11,6,new ImageIcon(InitHeroClass.class.getResource("/imgss/cutearcher.png")),new ImageIcon(InitHeroClass.class.getResource("/imgss/cutearcherhead.png")))
     ,MAGE(10,8,9,13,new ImageIcon(InitHeroClass.class.getResource("/imgss/cutemage.png")), new ImageIcon(InitHeroClass.class.getResource("/imgss/cutemadehead.png")))
-    ,ROGUE(8,13,14,5,new ImageIcon(InitHeroClass.class.getResource("/imgss/cuterogue.png")),new ImageIcon(InitHeroClass.class.getResource("/imgss/cuteroguehead.png")))
+    ,ROGUE(10,13,14,5,new ImageIcon(InitHeroClass.class.getResource("/imgss/cuterogue.png")),new ImageIcon(InitHeroClass.class.getResource("/imgss/cuteroguehead.png")))
     ,WARRIOR(14,5,8,13,new ImageIcon(InitHeroClass.class.getResource("/imgss/cuteswordguy.png")),new ImageIcon(InitHeroClass.class.getResource("/imgss/cuteswordhead.png")));
 
     public final int ATTACK;
