@@ -1,5 +1,3 @@
-package groupProject;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -62,39 +60,40 @@ public class Hero extends Character {
 		return faceImage;
 	}
 
-	
+	public void levelUp()
+	{
+		this.setLevel(this.getLevel() + 1);
+		String[] buttons =
+			{ "Attack", "Defense", "Health", "Crit" };
 
-		public void levelUp()
+		int returnValue = JOptionPane.showOptionDialog(null, "Select a stat to level up", "Level Up!",
+				JOptionPane.PLAIN_MESSAGE, 0,
+				this.getFaceImage(), buttons,
+				buttons[0]);
+
+		this.setAttack(this.getAttack() + 3);
+		this.setDefense(this.getDefense() + 2);
+		this.setHealth(this.getHealth() + 10);
+		this.setCrit(this.getCrit() + 1);
+
+		switch (returnValue)
 			{
-				this.setLevel(this.getLevel() + 1);
-				String[] buttons =
-					{ "Attack", "Defense", "Health", "Crit" };
-
-				int returnValue = JOptionPane.showOptionDialog(null, "Select a stat to level up", "Level Up!",
-						JOptionPane.PLAIN_MESSAGE, 0,
-						new ImageIcon(Battle.class.getResource("/groupProject.imgss/ArcherLady.png")), buttons,
-						buttons[0]);
-
-				this.setAttack(this.getAttack() + 3);
-				this.setDefense(this.getDefense() + 2);
-				this.setHealth(this.getHealth() + 10);
-				this.setCrit(this.getCrit() + 1);
-
-				switch (returnValue)
-					{
-						case 0:
-							this.setAttack(this.getAttack() + 3);
-							break;
-						case 1:
-							this.setDefense(this.getDefense() + 2);
-							break;
-						case 2:
-							this.setHealth(this.getHealth() + 10);
-							break;
-						case 3:
-							this.setCrit(this.getCrit() + 1);
-							break;
-					}
-				
+				case 0:
+					this.setAttack(this.getAttack() + 3);
+					break;
+				case 1:
+					this.setDefense(this.getDefense() + 2);
+					break;
+				case 2:
+					this.setHealth(this.getHealth() + 10);
+					break;
+				case 3:
+					this.setCrit(this.getCrit() + 1);
+					break;
 			}
+		
 	}
+	
+}
+
+
