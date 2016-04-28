@@ -60,7 +60,7 @@ public class Hero extends Character {
 		return faceImage;
 	}
 
-	public void levelUp()
+	public int levelUp()
 	{
 		this.setLevel(this.getLevel() + 1);
 		String[] buttons =
@@ -91,6 +91,7 @@ public class Hero extends Character {
 					this.setCrit(this.getCrit() + 1);
 					break;
 			}
+		return returnValue;
 		
 	}
 	

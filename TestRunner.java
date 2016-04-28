@@ -22,7 +22,8 @@ import org.junit.runner.notification.Failure;
 	            		,HeroTest.class,HeroTest.class,HeroTest.class,HeroTest.class
 	            		,EnemyTest.class,EnemyTest.class,EnemyTest.class,EnemyTest.class
 	            		,EnemyTest.class,EnemyTest.class,EnemyTest.class,EnemyTest.class
-	            		,EnemyTest.class,EnemyTest.class,EnemyTest.class,EnemyTest.class);
+	            		,EnemyTest.class,EnemyTest.class,EnemyTest.class,EnemyTest.class
+	            		,LevelUpTest.class,LevelUpTest.class,LevelUpTest.class);
 
 
 

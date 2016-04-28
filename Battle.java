@@ -19,33 +19,47 @@ import javax.swing.Timer;
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
 
+/**
+ * This class runs the battle scene between the hero and enemy.
+ * 
+ * @author Brian, Taylor, and Tana
+ *
+ */
 public class Battle {
 
+	/**
+	 * Main window frame.
+	 */
 	public JFrame frame;
+	/**
+	 * Represents the hero. Passed from Main.
+	 */
 	private Character hero;
+	/**
+	 * Represents the enemy (randomly generated).
+	 */
 	private Character enemy;
+	/**
+	 * Temporary hero health. Initialized by the hero's health stat.
+	 */
 	private int heroTempHealth;
+	/**
+	 * Temporary enemy health. Initialized by the enemy's health stat.
+	 */
 	private int enemyTempHealth;
+	/**
+	 * String variable for the main window message.
+	 */
 	private String message;
+	/**
+	 * represents the damage the enemy inflicts.
+	 */
 	private int enemyDamage;
+	/**
+	 * represents the damage the hero inflicts.
+	 */
 	private int heroDamage;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Character hero = new Hero(InitHeroClass.WARRIOR,"Bardok");
-//					Battle window = new Battle(hero, Enemy.randomEnemy(((Hero) hero).getLevel()));
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the application.
@@ -55,6 +69,9 @@ public class Battle {
 		this.heroTempHealth = hero.getHealth();
 		this.enemy = enemy;
 		this.enemyTempHealth = enemy.getHealth();
+		System.out.println(hero.getStats());
+		System.out.println();
+		System.out.println(enemy.getStats());
 		initialize();
 	}
 
@@ -209,9 +226,6 @@ public class Battle {
 					return;
 				}
 				
-					
-				
-				
 				ActionListener listener = new ActionListener(){
 			        public void actionPerformed(ActionEvent event){
 			        	
@@ -248,9 +262,6 @@ public class Battle {
 						message = "<html>" + message + "<br>" + enemy.getName() + " hit " + hero.getName() + " for " + heroDamage + " damage!</html>";
 						battleMessage.setText(message);
 						
-						
-						
-						
 			        }
 			    };
 			    Timer timer = new Timer(1000, listener);
@@ -265,14 +276,20 @@ public class Battle {
 		});
 	}
 
-	protected void battleComplete(boolean i,JLabel message,Character enemy) {
-		if (i)
+	/**
+	 * Displays results of the battle.
+	 * 
+	 * @param win
+	 * @param message
+	 * @param enemy
+	 */
+	protected void battleComplete(boolean win,JLabel message,Character enemy) {
+		if (win)
 		{
 			message.setText("Congrats! \nYou defeated the " + enemy.getName() + "!");
 		}
 		else
 			message.setText("Oh No! \nYou were defeated by the " + enemy.getName() + "!");
-		
 	}
 	
 }

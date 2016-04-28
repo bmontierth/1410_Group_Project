@@ -30,7 +30,7 @@ public class Enemy extends Character
 
 		public static Enemy randomEnemy(int heroLevel)
 			{
-				if(heroLevel == 5)
+				if(heroLevel % 5 == 0)
 					return finalBoss(heroLevel);
 			
 			String[] enemyArray =
@@ -44,11 +44,11 @@ public class Enemy extends Character
 				int[] stats =
 					{ randAttack, randDefense, randHealth, randCrit };
 				Random rand = new Random();
-				double heroScale = (heroLevel * .75);
+				double heroScale = (heroLevel * .9);
 
 				for (int stat = 0; stat < stats.length; stat++)
 					{
-						stats[stat] = (int) ((rand.nextInt(enemyArray.length) + 8) + heroScale);
+						stats[stat] = (int) ((rand.nextInt(enemyArray.length) + 8) + heroLevel);
 					}
 				
 				int random = rand.nextInt(enemyArray.length);
@@ -103,7 +103,7 @@ public class Enemy extends Character
 				int[] stats =
 					{ randAttack, randDefense, randHealth, randCrit };
 				Random rand = new Random();
-				double heroScale = (heroLevel * .9);
+				double heroScale = (heroLevel * 1.2);
 
 				for (int stat = 0; stat < stats.length; stat++)
 					{
