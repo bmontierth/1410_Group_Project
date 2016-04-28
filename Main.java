@@ -30,6 +30,9 @@ import javax.swing.ImageIcon;
 
 /**
  * @author Tana Larrabee
+ * Main.java contains the main method to start the game. It contains the GUI components.
+ * It contains the adventure panes, content panes, etc. It also contains the starting pane
+ * that the user uses to select their hero class and hero name.
  */
 public class Main {
 
@@ -45,7 +48,7 @@ public class Main {
 	Battle battleWindow;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. Create Jframe.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -69,7 +72,7 @@ public class Main {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the frame. Call the startingPane method.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -79,7 +82,10 @@ public class Main {
 	}
 
 	/**
-	 * 
+	 * adventurePane is called from the startingPane. Once the user chooses their hero information,
+	 * adventurePane is called to start the game.
+	 * adventurePane contains all the different panes for the map. It contains each of the rooms and all
+	 * the directional navigation buttons. On each different pane/room, it calls the method fight().
 	 */
 	private void adventurePane() {
 		frame.getContentPane().removeAll();
@@ -231,6 +237,13 @@ public class Main {
 		eastRoom.add(label_2);
 	}
 	
+	/**
+	 * startingPane method gives options for the user to select their Hero class and set their hero name.
+	 * It also has a "Ready" button for when the user has selected their class and set the name. 
+	 * Then Action Listeners for each of the Hero buttons.
+	 * Calls heroEvent when Class and Name are set.
+	 * Calls adventurePane to start the game.
+	 */
 	private void startingPane() {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -389,10 +402,22 @@ public class Main {
 		});
 	}
 	
+	/**
+	 * Hero event sets the Hero that the user has chosen.
+	 * @param e ActionEvent from startingPane
+	 * @param lblChosenHero the user's chosen hero from startingPane.
+	 */
 	private void heroEvent(ActionEvent e, JLabel lblChosenHero) {
 		lblChosenHero.setIcon(((JButton) e.getSource()).getIcon());
 	}
 	
+	/**
+	 * fight is called from adventurePane when the hero enters a new room. Each room has
+	 * an enemy. 
+	 * Fight starts a new Battle with a random enemy. Once they defeat that enemy, they are
+	 * able to progress to the next room.
+	 * Calls Battle.java
+	 */
 	private void fight() {
 		try {
 			battleWindow = new Battle(hero, Enemy.randomEnemy(((Hero) hero).getLevel()));
