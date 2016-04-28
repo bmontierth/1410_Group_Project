@@ -4,17 +4,29 @@ import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/*****************************************
- * Assignment: 1410 Group Project Class : ${CLASS_NAME} Author : Brian Montierth
+/*
+ * Assignment: 1410 Group Project 
+ * Class : ${CLASS_NAME} Author : Brian Montierth
  * Created : 4/7/2016
  ******************************************/
 
+/**
+ * Class Enemy extends Character. 
+ * It contains a constructor for an Enemy object. 
+ * a randomEnemy method that generates a random enemy including random stats. 
+ * a finalBoss method that generates a random final boss enemy that is stronger than the usual enemy
+ * 
+ * 
+ * @author Taylor
+ */
 public class Enemy extends Character
 	{
+		
 	private final Icon fullImage;
 	private final Icon faceImage;
 
 		/**
+		 * Enemy constructs an enemy. It takes in its' parameters from randomEnemy
 		 * @param attack
 		 * @param defense
 		 * @param health
@@ -28,9 +40,15 @@ public class Enemy extends Character
 				this.faceImage = faceImage;
 			}
 
+		/**
+		 * randomEnemy is a method that creates a random enemy and its parameters to be passed onto the Enemy constructor.
+		 * randomEnemy will also call a finalBoss every 5 levels. 
+		 * @param heroLevel heroLevel is needed because it scales the Enemy stats
+		 * @return Enemy that is randomly chosen from an enemyArray.
+		 */
 		public static Enemy randomEnemy(int heroLevel)
 			{
-				if(heroLevel == 5)
+				if(heroLevel % 5 == 0)
 					return finalBoss(heroLevel);
 			
 			String[] enemyArray =
@@ -48,7 +66,7 @@ public class Enemy extends Character
 
 				for (int stat = 0; stat < stats.length; stat++)
 					{
-						stats[stat] = (int) ((rand.nextInt(enemyArray.length) + 8) + heroScale);
+						stats[stat] = (int) ((rand.nextInt(enemyArray.length) + 5) * heroScale);
 					}
 				
 				int random = rand.nextInt(enemyArray.length);
@@ -81,8 +99,11 @@ public class Enemy extends Character
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see java.lang.Object#toString()
+		 */
+		/**
+		 * toString calls super.getName() method. @see Character.java
+		 * @return super.getName() 
 		 */
 		@Override
 		public String toString()
@@ -90,6 +111,12 @@ public class Enemy extends Character
 				return super.getName();
 			}
 
+		/**
+		 * finalBoss is very similar to randomEnemy() except that assigns higher stats than usual to make
+		 * a stronger Enemy.
+		 * @param heroLevel is the level of the Hero object. Enemy difficulty is scaled off of that param.
+		 * @return an Enemy object with higher than normal stats.
+		 */
 		public static Enemy finalBoss(int heroLevel)
 			{
 				String[] enemyArray =
@@ -107,7 +134,7 @@ public class Enemy extends Character
 
 				for (int stat = 0; stat < stats.length; stat++)
 					{
-						stats[stat] = (int) ((rand.nextInt(enemyArray.length) + 8) + heroScale);
+						stats[stat] = (int) ((rand.nextInt(enemyArray.length) + 8) * heroScale);
 					}
 
 				int random = rand.nextInt(enemyArray.length);
@@ -139,14 +166,14 @@ public class Enemy extends Character
 			}
 
 		/**
-		 * @return the fullImage
+		 * @return the fullImage of the Enemy object
 		 */
 		public Icon getFullImage() {
 			return fullImage;
 		}
 
 		/**
-		 * @return the faceImage
+		 * @return the faceImage of the Enemy object
 		 */
 		public Icon getFaceImage() {
 			return faceImage;
